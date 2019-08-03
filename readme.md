@@ -7,3 +7,15 @@ As of now, there is no real aim to the game. The project is currently under deve
 ## How to Build
 This game will build with the following requirements in place: Python 3.6 or higher, Pycrypto library, Pyinstaller for packaging, screen reader libraries, and finally, Pyglet. Pyglet, Pyinstaller, and Pycrypto can be installed using pip. A simple google search can reveal how to install these mainstream dependencies. However, the screen reader libraries are special. You can view the source and prebuilt binaries [at this link.](https://github.com/dkager/tolk) This is a library that offers generous support for major screen readers and their APIs.
 Please review the commits and source code for information about this project's current status.
+
+## Alternative Setup
+
+Alternatively, use a [virtualenv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/). See the previous link for an indepth guide, but that might look like:
+
+```bash
+$ python3 -m venv venv
+$ source venv/bin/activate
+$ pip3 install -r requirements.txt
+```
+
+This project's dependencies are now installed locally into its own directory, and are only available once the venv is activated (E.g. `source venv/bin/activate`.)
