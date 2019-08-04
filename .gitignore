@@ -1,0 +1,5 @@
+*.dll
+*.mp3
+*.wav
+dist/
+build/
