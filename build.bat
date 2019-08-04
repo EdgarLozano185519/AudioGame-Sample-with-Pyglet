@@ -17,4 +17,4 @@ pyinstaller --windowed --key=key --clean ^
     --add-data="../sounds/footsteps/wood/fs_wood_8.ogg;sounds/footsteps/wood" ^
     --add-data="../sounds/footsteps/wood/fs_wood_9.ogg;sounds/footsteps/wood" ^
     --add-data="../sounds/footsteps/wood/fs_wood_10.ogg;sounds/footsteps/wood" ^
-    pygletTest.py
+    src/pygletTest.py
