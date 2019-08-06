@@ -19,3 +19,7 @@ $ pip3 install -r requirements.txt
 ```
 
 This project's dependencies are now installed locally into its own directory, and are only available once the venv is activated (E.g. `source venv/bin/activate`.)
+# Things to Do
+Check out the [ToDo](docs/todo.md) to see if you can contribute.
+# Contributors
+Check out the [list of contributors.](docs/contributors.md)
