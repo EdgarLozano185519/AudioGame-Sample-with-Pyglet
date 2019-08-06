@@ -1,5 +1,5 @@
 @echo off
-pyinstaller --windowed --key=key --clean ^
+pyinstaller --windowed --onefile --clean ^
     --add-binary="dlls/nvdaControllerClient32.dll;." ^
     --add-binary="dlls/Tolk.dll;." ^
     --add-binary="dlls/SAAPI32.dll;." ^
