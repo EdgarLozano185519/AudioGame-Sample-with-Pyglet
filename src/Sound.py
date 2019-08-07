@@ -17,12 +17,8 @@ class Sound:
 
     def loop(self, looped):
         self.looped = looped
-        if looped == True:
-            self.looper = pyglet.media.SourceGroup(self.source.audio_format,None)
-            self.looper.loop = True
-            self.looper.queue(self.source)
-            self.player.queue(self.looper)
-        else:
+        self.player.loop = looped
+        if looped:
             self.player.queue(self.source)
 
     def pause(self):
