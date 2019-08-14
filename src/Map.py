@@ -29,17 +29,17 @@ class Map:
      A blank string if a tile wasn't found or a tiletype which is within the x, y, and z coordinate"""
      found_responses = ""
      for i in self.tile_list:
-      if i.in_bound(x, y, z): found_responses = i.type
+      if i.in_bound(x, y, z): found_responses = i.tiletype
      return found_responses
 
     def get_zone_at(self, x, y, z):
      """Same as get_tile_at, except deals with zones. Will return Uncharted Area if nothing was found"""
      found_responses = "Uncharted Area"
      for i in self.zone_list:
-      if i.in_bound(x, y, z): found_responses = i.type
+      if i.in_bound(x, y, z): found_responses = i.zonename
      return found_responses
 
-    def spawn_tile(self, minx, maxx, miny, maxy, minz, maxz, type):
+    def spawn_tile(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=''):
      """Spawns a tile
      Params:
      minx (int): The minimum x of the tile
@@ -48,9 +48,9 @@ class Map:
      maxy (int): The maximum y of the tile
      minz (int): The minimum z of the tile
      maxz (int): The maximum z of the tile"""
-     self.tile_list.append(tile(minx, maxx, miny, maxy, minz, maxz, type))
+     self.tile_list.append(Tile(minx, maxx, miny, maxy, minz, maxz, type))
 
-    def spawn_zone(self, minx, maxx, miny, maxy, minz, maxz, type):
+    def spawn_zone(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=''):
      """Same as spawn_tile, except it deals with zones"""
      self.zone_list.append(zone(minx, maxx, miny, maxy, minz, maxz, type))
 
