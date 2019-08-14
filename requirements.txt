@@ -1,3 +1,8 @@
 pyglet
 pyinstaller
 pyopenal
+pypiwin32
+ffmpeg
+libloader
+platform_utils
+accessibility_output2
