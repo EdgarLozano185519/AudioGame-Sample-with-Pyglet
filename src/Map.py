@@ -52,7 +52,7 @@ class Map:
 
     def spawn_zone(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=''):
      """Same as spawn_tile, except it deals with zones"""
-     self.zone_list.append(zone(minx, maxx, miny, maxy, minz, maxz, type))
+     self.zone_list.append(Zone(minx, maxx, miny, maxy, minz, maxz, type))
 
     def get_min_x(self):
      """Returns the minimum x"""
