@@ -14,7 +14,7 @@ from Player import *
 
 class GameLoop:
     def __init__(self):
-        self.speech = SpeechSystem(0)
+        self.speech = SpeechSystem()
         self.window = GameWindow()
 
         # Dictionary of keys
@@ -45,9 +45,8 @@ class GameLoop:
         pyglet.resource.reindex()
 
         # Initialize maps
-        self.first_map = Map()
-        self.first_map.init_map(100, 100, 3)
-        self.first_map.set_map_terrain(0)
+        self.first_map = Map(0, 0, 0, 100, 100, 3)
+        self.first_map.spawn_tile(0, 100, 0, 100, 0, 3, "wood") #Can be used later to play surface but as of now I'm still sticking with pyglet
 
         # Seed random number generator
         random.seed()
@@ -58,15 +57,15 @@ class GameLoop:
     # Function for loading all sounds
     def load_sounds(self):
         self.menu_click = Sound()
-        self.menu_click.load("click.ogg", False)
+        self.menu_click.load("click.wav", False)
         self.menu_click.loop(False)
         self.main_menu_music = Sound()
-        self.main_menu_music.load("mainMenuMusic.ogg", True)
+        self.main_menu_music.load("mainMenuMusic.wav", True)
         self.main_menu_music.loop(True)
         self.fs_wood = [Sound() for x in range(10)]
         r = 0
         while r < 10:
-            self.fs_wood[r].load("fs_wood_"+str(r+1)+".ogg",False)
+            self.fs_wood[r].load("fs_wood_"+str(r+1)+".wav",False)
             self.fs_wood[r].loop(False)
             r += 1
 
@@ -138,8 +137,8 @@ class GameLoop:
             self.game_state = 1
 
     def game_play_fs(self):
-        t = self.first_map.get_tile(self.p.get_x(), self.p.get_y(), self.p.get_z())
-        if t == 0:
+        t = self.first_map.get_tile_at(self.p.get_x(), self.p.get_y(), self.p.get_z())
+        if t != "":
             self.fs_wood[random.randint(0,9)].play()
 
     def game_player_left(self):
@@ -153,7 +152,7 @@ class GameLoop:
     def game_player_right(self):
         if self.game_state >= 2:
             self.p.set_x(self.p.get_x()+1)
-            if self.p.get_x() >= self.current.get_x_max():
+            if self.p.get_x() >= self.current.get_max_x():
                 self.p.set_x(self.p.get_x()-1)
             else:
                 self.game_play_fs()
@@ -169,7 +168,7 @@ class GameLoop:
     def game_player_up(self):
         if self.game_state >= 2:
             self.p.set_y(self.p.get_y()+1)
-            if self.p.get_y() >= self.current.get_y_max():
+            if self.p.get_y() >= self.current.get_max_y():
                 self.p.set_y(self.p.get_y()-1)
             else:
                 self.game_play_fs()
@@ -182,7 +181,7 @@ class GameLoop:
         self.speech.speak("Game is loading, please wait...")
 
     def close(self):
-        self.speech.unload()
+        pass
 
     def on_key_press(self, symbol, modifiers):
         if symbol == key.UP:
