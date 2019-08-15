@@ -1,3 +1,0 @@
-platform_utils
-pypiwin32
-libloader

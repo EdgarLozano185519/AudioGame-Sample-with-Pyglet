@@ -1,11 +1,12 @@
 @echo off
-pyinstaller --onefile --windowed --clean ^
+pyinstaller --onefile --clean ^
     --add-binary="dlls/nvdaControllerClient32.dll;." ^
     --add-binary="dlls/Tolk.dll;." ^
     --add-binary="dlls/SAAPI32.dll;." ^
-    --add-binary="dlls/dolapi32.dll;." ^
+    --add-binary="dlls/dolapi.dll;." ^
     --add-binary="dlls/avcodec-58.dll;." ^
     --add-binary="dlls/avdevice-58.dll;." ^
+    --add-binary="dlls/PCTKUSR.dll;." ^
     --add-binary="dlls/avfilter-7.dll;." ^
     --add-binary="dlls/avformat-58.dll;." ^
     --add-binary="dlls/avutil-56.dll;." ^
