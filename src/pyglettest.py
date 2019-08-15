@@ -1,4 +1,4 @@
-from GameLoop import *
+from gameloop import *
 import pyglet
 game = GameLoop()
 window = game.place_window()

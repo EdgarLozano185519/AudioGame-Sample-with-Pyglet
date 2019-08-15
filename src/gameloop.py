@@ -1,16 +1,16 @@
-from GameWindow import *
-from SpeechSystem import *
+from gamewindow import *
+from speechsystem import *
 from pyglet.window import key
-from Menu import *
-from GameTimer import *
+from menu import *
+from gametimer import *
 import pyglet.app
 import pyglet.resource
-from Sound import *
+from sound import *
 import time
 import pyglet.event
-from Map import *
+from map import *
 import random
-from Player import *
+from player import *
 
 class GameLoop:
     def __init__(self):
