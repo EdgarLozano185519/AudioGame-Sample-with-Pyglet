@@ -1,5 +1,6 @@
 import time
 
+
 class GameTimer:
     def __init__(self):
         self.start = 0
@@ -37,7 +38,7 @@ class GameTimer:
             if self.paused == True:
                 my_time = self.pause
             else:
-                my_time = (time.time()-self.start)*1000
+                my_time = (time.time() - self.start) * 1000
         return my_time
 
     def is_started(self):

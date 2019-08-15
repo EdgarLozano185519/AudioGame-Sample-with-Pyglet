@@ -1,5 +1,5 @@
 class Map:
-    def __init__(self, minx = 0, miny = 0, minz = 0, maxx = 0, maxy = 0, maxz = 0):
+    def __init__(self, minx=0, miny=0, minz=0, maxx=0, maxy=0, maxz=0):
         """Constructs a basic map:
         params:
         minx (int): Minimum x of the map
@@ -29,17 +29,19 @@ class Map:
         A blank string if a tile wasn't found or a tiletype which is within the x, y, and z coordinate"""
         found_responses = ""
         for i in self.tile_list:
-         if i.in_bound(x, y, z): found_responses = i.tiletype
+            if i.in_bound(x, y, z):
+                found_responses = i.tiletype
         return found_responses
 
     def get_zone_at(self, x, y, z):
         """Same as get_tile_at, except deals with zones. Will return Uncharted Area if nothing was found"""
         found_responses = "Uncharted Area"
         for i in self.zone_list:
-         if i.in_bound(x, y, z): found_responses = i.zonename
+            if i.in_bound(x, y, z):
+                found_responses = i.zonename
         return found_responses
 
-    def spawn_tile(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=''):
+    def spawn_tile(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=""):
         """Spawns a tile
         Params:
         minx (int): The minimum x of the tile
@@ -50,7 +52,7 @@ class Map:
         maxz (int): The maximum z of the tile"""
         self.tile_list.append(Tile(minx, maxx, miny, maxy, minz, maxz, type))
 
-    def spawn_zone(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=''):
+    def spawn_zone(self, minx=0, maxx=0, miny=0, maxy=0, minz=0, maxz=0, type=""):
         """Same as spawn_tile, except it deals with zones"""
         self.zone_list.append(Zone(minx, maxx, miny, maxy, minz, maxz, type))
 
@@ -78,28 +80,30 @@ class Map:
         """Returns the maximum z"""
         return self.maxz
 
+
 class BaseMapObj:
-      """base map object
-      this object is the base class from where tiles, zones and custom map objects inherit
-      """
-      def __init__(self, minx,  maxx, miny, maxy, minz, maxz, type):
-          """the BaseMapObj constructor
-          params:
-          minx (int) the minimum x, from where  the object starts
-          maxx (int) the maximum x of the map
-          miny (int) the minimum y of the map
-          maxy (int) the maximum y of the map
-          minz (int) the minimum z of the map
-          maxz (int) the maximum z of the map
-          type (str) the type of the map object, tile, zone, or whatever
-          """
-          self.minx = minx
-          self.maxx = maxx
-          self.miny = miny
-          self.maxy = maxy
-          self.minz = minz
-          self.maxz = maxz
-          self.type = type
+    """base map object
+    this object is the base class from where tiles, zones and custom map objects inherit
+    """
+
+    def __init__(self, minx, maxx, miny, maxy, minz, maxz, type):
+        """the BaseMapObj constructor
+        params:
+        minx (int) the minimum x, from where  the object starts
+        maxx (int) the maximum x of the map
+        miny (int) the minimum y of the map
+        maxy (int) the maximum y of the map
+        minz (int) the minimum z of the map
+        maxz (int) the maximum z of the map
+        type (str) the type of the map object, tile, zone, or whatever
+        """
+        self.minx = minx
+        self.maxx = maxx
+        self.miny = miny
+        self.maxy = maxy
+        self.minz = minz
+        self.maxz = maxz
+        self.type = type
 
     def in_bound(self, x, y, z):
         """verifies whether the current object covers a certain coordinate
@@ -110,17 +114,27 @@ class BaseMapObj:
         returns:
         (bool) true if the objects covers this coordinate, or false if otherwise
         """
-        return x >= self.minx and x <= self.maxx and y >= self.miny and y <= self.maxy and z >= self.minz and z <= self.maxz
+        return (
+            x >= self.minx
+            and x <= self.maxx
+            and y >= self.miny
+            and y <= self.maxy
+            and z >= self.minz
+            and z <= self.maxz
+        )
+
 
 class Tile(BaseMapObj):
-        """An internal tile class. You do not need to create any objects with this type externally"""
+    """An internal tile class. You do not need to create any objects with this type externally"""
+
     def __init__(self, minx, maxx, miny, maxy, minz, maxz, type):
-        super(Tile, self).__init__(minx, maxx, miny, maxy, minz, maxz, 'tile')
+        super(Tile, self).__init__(minx, maxx, miny, maxy, minz, maxz, "tile")
         self.tiletype = type
 
 
 class Zone(BaseMapObj):
-       """an internal zone class"""
-       def __init__(self, minx, maxx, miny, maxy, minz, maxz, name):
-            super(Zone, self).__init__(minx, maxx, miny, maxy, minz, maxz, 'zone')
-            self.zonename = name
+    """an internal zone class"""
+
+    def __init__(self, minx, maxx, miny, maxy, minz, maxz, name):
+        super(Zone, self).__init__(minx, maxx, miny, maxy, minz, maxz, "zone")
+        self.zonename = name
