@@ -1,6 +1,7 @@
 import pyglet.media
 import pyglet.resource
 
+
 class Sound:
     def load(self, mystring, streamed):
         self.source = pyglet.resource.media(mystring, streaming=streamed)
@@ -33,5 +34,5 @@ class Sound:
     def set_time(self, secs):
         self.player.seek(secs)
 
-    def set_position(self,x,y,z):
-        self.player.position = (x,y,z)
+    def set_position(self, x, y, z):
+        self.player.position = (x, y, z)

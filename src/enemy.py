@@ -1,5 +1,6 @@
 import math
 
+
 class Enemy:
     def __init__():
         self.x = 0
@@ -16,7 +17,7 @@ class Enemy:
         self.max_distance = distance
 
     def calculate_step_volume(self):
-        self.step_volume = 1.0/self.max_distance
+        self.step_volume = 1.0 / self.max_distance
 
-    def calculate_distance(self,x,y,z):
-        return math.sqrt((self.x-x)**2+(self.y-y)**2+(self.z-z)**2)
+    def calculate_distance(self, x, y, z):
+        return math.sqrt((self.x - x) ** 2 + (self.y - y) ** 2 + (self.z - z) ** 2)

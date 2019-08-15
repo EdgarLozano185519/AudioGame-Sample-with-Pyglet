@@ -12,20 +12,23 @@ from map import *
 import random
 from player import *
 
+
 class GameLoop:
     def __init__(self):
         self.speech = SpeechSystem()
         self.window = GameWindow()
 
         # Dictionary of keys
-        self.keys = dict(up=False,
+        self.keys = dict(
+            up=False,
             left=False,
             right=False,
             down=False,
             enter=False,
             escape=False,
             f1=False,
-            f2=False)
+            f2=False,
+        )
 
         # Timer for entire game is here
         self.game_timer = GameTimer()
@@ -38,15 +41,19 @@ class GameLoop:
         self.game_state = 0
 
         # Specify paths to search for resources
-        pyglet.resource.path = ['sounds/music',
-            'sounds/clicks',
-            'sounds/footsteps/wood',
-            'sounds/sample']
+        pyglet.resource.path = [
+            "sounds/music",
+            "sounds/clicks",
+            "sounds/footsteps/wood",
+            "sounds/sample",
+        ]
         pyglet.resource.reindex()
 
         # Initialize maps
         self.first_map = Map(0, 0, 0, 100, 100, 3)
-        self.first_map.spawn_tile(0, 100, 0, 100, 0, 3, "wood") #Can be used later to play surface but as of now I'm still sticking with pyglet
+        self.first_map.spawn_tile(
+            0, 100, 0, 100, 0, 3, "wood"
+        )  # Can be used later to play surface but as of now I'm still sticking with pyglet
 
         # Seed random number generator
         random.seed()
@@ -57,15 +64,15 @@ class GameLoop:
     # Function for loading all sounds
     def load_sounds(self):
         self.menu_click = Sound()
-        self.menu_click.load("click.wav", False)
+        self.menu_click.load("click.ogg", False)
         self.menu_click.loop(False)
         self.main_menu_music = Sound()
-        self.main_menu_music.load("mainMenuMusic.wav", True)
+        self.main_menu_music.load("mainMenuMusic.ogg", True)
         self.main_menu_music.loop(True)
         self.fs_wood = [Sound() for x in range(10)]
         r = 0
         while r < 10:
-            self.fs_wood[r].load("fs_wood_"+str(r+1)+".wav",False)
+            self.fs_wood[r].load("fs_wood_" + str(r + 1) + ".ogg", False)
             self.fs_wood[r].loop(False)
             r += 1
 
@@ -104,8 +111,10 @@ class GameLoop:
     def main_menu_escape(self):
         if self.game_state == 0:
             x = 0
-            while x < 100 and self.main_menu_music.get_volume()>=0:
-                self.main_menu_music.set_volume(self.main_menu_music.get_volume()-0.01)
+            while x < 100 and self.main_menu_music.get_volume() >= 0:
+                self.main_menu_music.set_volume(
+                    self.main_menu_music.get_volume() - 0.01
+                )
                 time.sleep(0.01)
                 x += 1
             pyglet.app.exit()
@@ -113,8 +122,10 @@ class GameLoop:
     def main_menu_enter(self):
         if self.game_state == 0:
             x = 0
-            while x < 100 and self.main_menu_music.get_volume()>=0:
-                self.main_menu_music.set_volume(self.main_menu_music.get_volume()-0.01)
+            while x < 100 and self.main_menu_music.get_volume() >= 0:
+                self.main_menu_music.set_volume(
+                    self.main_menu_music.get_volume() - 0.01
+                )
                 time.sleep(0.01)
                 x += 1
 
@@ -126,11 +137,11 @@ class GameLoop:
 
     def main_menu_volume_up(self):
         if self.game_state == 0 and self.main_menu_music.get_volume() <= 1.0:
-            self.main_menu_music.set_volume(self.main_menu_music.get_volume()+0.001)
+            self.main_menu_music.set_volume(self.main_menu_music.get_volume() + 0.001)
 
     def main_menu_volume_down(self):
-        if self.game_state == 0 and self.main_menu_music.get_volume()>=0:
-            self.main_menu_music.set_volume(self.main_menu_music.get_volume()-0.001)
+        if self.game_state == 0 and self.main_menu_music.get_volume() >= 0:
+            self.main_menu_music.set_volume(self.main_menu_music.get_volume() - 0.001)
 
     def game_escape(self):
         if self.game_state == 2:
@@ -139,43 +150,43 @@ class GameLoop:
     def game_play_fs(self):
         t = self.first_map.get_tile_at(self.p.get_x(), self.p.get_y(), self.p.get_z())
         if t != "":
-            self.fs_wood[random.randint(0,9)].play()
+            self.fs_wood[random.randint(0, 9)].play()
 
     def game_player_left(self):
         if self.game_state >= 2:
-            self.p.set_x(self.p.get_x()-1)
+            self.p.set_x(self.p.get_x() - 1)
             if self.p.get_x() < 0:
-                self.p.set_x(self.p.get_x()+1)
+                self.p.set_x(self.p.get_x() + 1)
             else:
                 self.game_play_fs()
 
     def game_player_right(self):
         if self.game_state >= 2:
-            self.p.set_x(self.p.get_x()+1)
+            self.p.set_x(self.p.get_x() + 1)
             if self.p.get_x() >= self.current.get_max_x():
-                self.p.set_x(self.p.get_x()-1)
+                self.p.set_x(self.p.get_x() - 1)
             else:
                 self.game_play_fs()
 
     def game_player_down(self):
         if self.game_state >= 2:
-            self.p.set_y(self.p.get_y()-1)
+            self.p.set_y(self.p.get_y() - 1)
             if self.p.get_y() < 0:
-                self.p.set_y(self.p.get_y()+1)
+                self.p.set_y(self.p.get_y() + 1)
             else:
                 self.game_play_fs()
 
     def game_player_up(self):
         if self.game_state >= 2:
-            self.p.set_y(self.p.get_y()+1)
+            self.p.set_y(self.p.get_y() + 1)
             if self.p.get_y() >= self.current.get_max_y():
-                self.p.set_y(self.p.get_y()-1)
+                self.p.set_y(self.p.get_y() - 1)
             else:
                 self.game_play_fs()
 
     def game_current_map(self):
         if self.game_state == 2:
-            self.current  = self.first_map
+            self.current = self.first_map
 
     def speak_random(self):
         self.speech.speak("Game is loading, please wait...")
@@ -185,13 +196,13 @@ class GameLoop:
 
     def on_key_press(self, symbol, modifiers):
         if symbol == key.UP:
-            self.keys['up'] = True
+            self.keys["up"] = True
         elif symbol == key.DOWN:
-            self.keys['down'] = True
+            self.keys["down"] = True
         if symbol == key.LEFT:
-            self.keys['left'] = True
+            self.keys["left"] = True
         elif symbol == key.RIGHT:
-            self.keys['right'] = True
+            self.keys["right"] = True
         elif symbol == key.ESCAPE:
             self.keys["escape"] = True
             return pyglet.event.EVENT_HANDLED
@@ -204,13 +215,13 @@ class GameLoop:
 
     def on_key_release(self, symbol, modifiers):
         if symbol == key.UP:
-            self.keys["up"] = False;
+            self.keys["up"] = False
         elif symbol == key.DOWN:
-            self.keys["down"] = False;
+            self.keys["down"] = False
         if symbol == key.LEFT:
-            self.keys["left"] = False;
+            self.keys["left"] = False
         elif symbol == key.RIGHT:
-            self.keys["right"] = False;
+            self.keys["right"] = False
         elif symbol == key.ESCAPE:
             self.keys["escape"] = False
             return pyglet.event.EVENT_HANDLED

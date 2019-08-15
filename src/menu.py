@@ -7,7 +7,7 @@ class Menu:
     def add_item(self, mystring):
         self.items.append(str(mystring))
 
-    def add_click(self,soundstring):
+    def add_click(self, soundstring):
         self.click = soundstring
         self.click_exists += 1
         return self.click
@@ -16,7 +16,7 @@ class Menu:
         return self.click_exists
 
     def get_next(self):
-        temp = self.current+1
+        temp = self.current + 1
         if temp < len(self.items):
             self.current = temp
         return self.current

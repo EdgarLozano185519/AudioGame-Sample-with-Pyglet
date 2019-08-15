@@ -1,15 +1,19 @@
 from gameloop import *
 import pyglet
+
 game = GameLoop()
 window = game.place_window()
 window.push_handlers(game)
+
 
 @window.event
 def on_draw():
     window.clear()
 
+
 def update(dt):
     game.update(dt)
+
 
 game.load_sounds()
 game.set_up_menus()
