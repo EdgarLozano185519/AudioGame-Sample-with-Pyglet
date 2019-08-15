@@ -79,10 +79,10 @@ class Map:
      return self.maxz
 
 class BaseMapObj:
-   """base map object
-   this object is the base class from where tiles, zones and custom map objects inherit
-   """
-   def __init__(self, minx,  maxx, miny, maxy, minz, maxz, type):
+    """base map object
+    this object is the base class from where tiles, zones and custom map objects inherit
+    """
+    def __init__(self, minx,  maxx, miny, maxy, minz, maxz, type):
        """the BaseMapObj constructor
        params:
        minx (int) the minimum x, from where  the object starts
